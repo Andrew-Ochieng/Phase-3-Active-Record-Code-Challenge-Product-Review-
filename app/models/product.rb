@@ -3,16 +3,18 @@ class Product < ActiveRecord::Base
     has_many :users, through: :reviews
 
     def leave_review(user, star_rating, comment)
-        Review.create(star_rating: star_rating, comment: comment, user_id: user.id, product_id: self.id)
+        Review.create(product: self, user: user, star_rating: star_rating, comment: comment)
     end
 
-    def self.print_all_reviews
-      puts revies.map do |review| 
-        "Review for #{review.product.name} by #{review.user.name}: #{review.star_rating}. #{review.comment}"
-      end
+    def print_all_reviews
+        self.reviews.each do |review|
+            puts "Review for #{review.product.name} by #{review.user.name}: #{review.star_rating}. #{review.comment}"
+        end
+        
+        nil
     end
 
-    def self.average_rating
-        reviews.average(:star_rating).to_f
+    def average_rating
+        self.reviews.average(:star_rating).to_f
     end
 end

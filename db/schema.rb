@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_06_123159) do
+ActiveRecord::Schema.define(version: 2022_11_03_112007) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2022_11_06_123159) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "user_id"
     t.integer "product_id"
+    t.integer "user_id"
     t.integer "star_rating"
     t.string "comment"
   end
